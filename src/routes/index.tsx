@@ -44,7 +44,7 @@ function HomePage() {
           {CATEGORY_LIST.map((c) => (
             <CategoryTile
               key={c.id}
-              to={`/category/${c.id}` as string}
+              categoryId={c.id}
               label={c.label}
               icon={c.icon}
               colorClass={c.colorClass}
