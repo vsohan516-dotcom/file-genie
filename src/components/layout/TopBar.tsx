@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "@tanstack/react-router";
+import { Link, useLocation, useRouter } from "@tanstack/react-router";
 import { ArrowLeft, MoreVertical, Search } from "lucide-react";
 import type { ReactNode } from "react";
 
@@ -11,7 +11,7 @@ interface TopBarProps {
 }
 
 export function TopBar({ title, subtitle, showBack, hideSearch, trailing }: TopBarProps) {
-  const navigate = useNavigate();
+  const router = useRouter();
   const location = useLocation();
   const canGoBack = showBack ?? location.pathname !== "/";
 
@@ -21,7 +21,7 @@ export function TopBar({ title, subtitle, showBack, hideSearch, trailing }: TopB
         {canGoBack ? (
           <button
             aria-label="Back"
-            onClick={() => navigate({ to: ".." as unknown as string })}
+            onClick={() => router.history.back()}
             className="grid h-11 w-11 place-items-center rounded-full text-on-surface transition-colors hover:bg-surface-container-high"
           >
             <ArrowLeft className="h-5 w-5" />
