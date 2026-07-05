@@ -204,9 +204,6 @@ function DownloadRow({
         {item.status === "downloading" && (
           <ActionButton icon={Pause} label="Pause" onClick={onPause} />
         )}
-        {(item.status === "paused" || item.status === "queued") && item.status !== "queued" && (
-          <ActionButton icon={Play} label="Resume" onClick={onResume} />
-        )}
         {item.status === "paused" && (
           <ActionButton icon={Play} label="Resume" onClick={onResume} />
         )}

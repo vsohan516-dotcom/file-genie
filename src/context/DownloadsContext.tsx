@@ -141,7 +141,7 @@ export function DownloadsProvider({ children }: { children: ReactNode }) {
           }
         }
 
-        const blob = new Blob(existingChunks);
+        const blob = new Blob(existingChunks as BlobPart[]);
         const buf = await blob.arrayBuffer();
         const checksum = await sha256(buf);
         const blobUrl = URL.createObjectURL(blob);
