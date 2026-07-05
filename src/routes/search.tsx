@@ -44,6 +44,8 @@ function SearchPage() {
   const [query, setQuery] = useState("");
   const [ext, setExt] = useState("");
   const [minMb, setMinMb] = useState<number>(0);
+  const [kind, setKind] = useState<KindFilter>("all");
+  const [date, setDate] = useState<DateFilter>("any");
 
   const { data, isFetching } = useQuery({
     queryKey: ["index"],
@@ -62,18 +64,28 @@ function SearchPage() {
   });
 
   const q = query.trim().toLowerCase();
+  const dateCutoff = useMemo(() => {
+    const opt = DATE_OPTIONS.find((d) => d.id === date);
+    if (!opt || !opt.days) return 0;
+    return Date.now() - opt.days * 24 * 60 * 60 * 1000;
+  }, [date]);
+
+  const hasFilters = !!q || !!ext || !!minMb || kind !== "all" || date !== "any";
+
   const results = useMemo(() => {
-    if (!q && !ext && !minMb) return [];
+    if (!hasFilters) return [];
     return data
       .filter((e) => (!q || e.name.toLowerCase().includes(q)))
       .filter((e) => (!ext || extOf(e.name) === ext.toLowerCase()))
       .filter((e) => (!minMb || e.size >= minMb * 1024 * 1024))
+      .filter((e) => (kind === "all" ? true : e.kind === kind))
+      .filter((e) => (!dateCutoff ? true : e.mtime >= dateCutoff))
       .slice(0, 200);
-  }, [data, q, ext, minMb]);
+  }, [data, q, ext, minMb, kind, dateCutoff, hasFilters]);
 
   return (
-    <PageShell title="Search" subtitle="By name, extension or size" hideSearch>
-      <div className="mb-4 flex items-center gap-2 rounded-full bg-surface-container px-4 py-2.5">
+    <PageShell title="Search" subtitle="Name · type · date · size" hideSearch>
+      <div className="mb-3 flex items-center gap-2 rounded-full bg-surface-container px-4 py-2.5">
         <SearchIcon className="h-4 w-4 text-muted-foreground" />
         <input
           autoFocus
@@ -83,6 +95,38 @@ function SearchPage() {
           placeholder="Type to search…"
           className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
         />
+      </div>
+
+      <div className="mb-2 -mx-1 flex gap-1 overflow-x-auto px-1 pb-1">
+        {KIND_OPTIONS.map((k) => (
+          <button
+            key={k.id}
+            onClick={() => setKind(k.id)}
+            className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+              kind === k.id
+                ? "bg-primary text-primary-foreground"
+                : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
+            }`}
+          >
+            {k.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="mb-3 -mx-1 flex gap-1 overflow-x-auto px-1 pb-1">
+        {DATE_OPTIONS.map((d) => (
+          <button
+            key={d.id}
+            onClick={() => setDate(d.id)}
+            className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+              date === d.id
+                ? "bg-primary text-primary-foreground"
+                : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
+            }`}
+          >
+            {d.label}
+          </button>
+        ))}
       </div>
 
       <div className="mb-4 grid grid-cols-2 gap-2">
