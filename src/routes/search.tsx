@@ -171,11 +171,11 @@ function SearchPage() {
       ) : results.length === 0 ? (
         <EmptyState
           icon={SearchIcon}
-          title={q || ext || minMb ? "No matches" : "Start typing to search"}
+          title={hasFilters ? "No matches" : "Start typing to search"}
           description={
-            q || ext || minMb
-              ? "Try a different name, extension or size."
-              : "Filter by name, file extension or minimum size."
+            hasFilters
+              ? "Try different keywords or relax your filters."
+              : "Filter by name, type, date, extension or minimum size."
           }
         />
       ) : (
