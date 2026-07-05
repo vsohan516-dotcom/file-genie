@@ -4,7 +4,19 @@ import { StorageCard } from "@/components/common/StorageCard";
 import { CategoryTile } from "@/components/common/CategoryTile";
 import { CATEGORY_LIST } from "@/utils/categories";
 import { ROOTS } from "@/services/filesystem";
-import { FolderOpen, Sparkles } from "lucide-react";
+import { useDownloads } from "@/context/DownloadsContext";
+import {
+  BarChart3,
+  Clock,
+  DownloadCloud,
+  FolderOpen,
+  LayoutGrid,
+  Lock,
+  Send,
+  Sparkles,
+  Star,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
