@@ -1,11 +1,11 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Clock, FolderOpen, Home, Settings, Star } from "lucide-react";
+import { FolderOpen, Home, LayoutGrid, Search, Settings } from "lucide-react";
 
 const NAV = [
   { to: "/", label: "Home", icon: Home },
   { to: "/browse", label: "Browse", icon: FolderOpen },
-  { to: "/recent", label: "Recent", icon: Clock },
-  { to: "/favorites", label: "Favorites", icon: Star },
+  { to: "/search", label: "Search", icon: Search },
+  { to: "/tools", label: "Tools", icon: LayoutGrid },
   { to: "/settings", label: "Settings", icon: Settings },
 ] as const;
 
