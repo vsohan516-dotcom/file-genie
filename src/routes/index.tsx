@@ -32,7 +32,15 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
+const QUICK: { to: string; label: string; icon: LucideIcon; colorClass: string }[] = [
+  { to: "/downloads", label: "Downloads", icon: DownloadCloud, colorClass: "bg-cat-image" },
+  { to: "/transfer", label: "Transfer", icon: Send, colorClass: "bg-cat-video" },
+  { to: "/vault", label: "Vault", icon: Lock, colorClass: "bg-cat-apk" },
+  { to: "/analytics", label: "Analytics", icon: BarChart3, colorClass: "bg-cat-archive" },
+];
+
 function HomePage() {
+  const { activeCount } = useDownloads();
   // In-app estimated storage. On device this is replaced by StorageManager
   // if the OS reports quotas; we display an informative placeholder otherwise.
   const total = 128 * 1024 * 1024 * 1024;
@@ -41,6 +49,65 @@ function HomePage() {
   return (
     <PageShell title="Smart Files" subtitle="Fast · Private · Beautiful">
       <StorageCard label="Internal storage" usedBytes={used} totalBytes={total} />
+
+      <section className="mt-6">
+        <h2 className="mb-3 text-sm font-semibold text-foreground">Quick actions</h2>
+        <div className="grid grid-cols-4 gap-2">
+          {QUICK.map((q) => (
+            <Link
+              key={q.to}
+              to={q.to}
+              className="ripple flex flex-col items-center gap-1.5 rounded-2xl bg-surface-container p-3"
+            >
+              <span
+                className={`grid h-10 w-10 place-items-center rounded-2xl text-white ${q.colorClass}`}
+              >
+                <q.icon className="h-5 w-5" />
+              </span>
+              <span className="text-[11px] font-medium text-foreground">{q.label}</span>
+            </Link>
+          ))}
+        </div>
+        {activeCount > 0 && (
+          <Link
+            to="/downloads"
+            className="mt-2 flex items-center justify-between rounded-2xl bg-primary-container px-4 py-2 text-xs text-on-primary-container"
+          >
+            <span>{activeCount} download{activeCount === 1 ? "" : "s"} in progress</span>
+            <span className="font-semibold">View</span>
+          </Link>
+        )}
+      </section>
+
+      <section className="mt-6">
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="text-sm font-semibold text-foreground">Shortcuts</h2>
+        </div>
+        <div className="grid grid-cols-3 gap-2">
+          <Link
+            to="/recent"
+            className="ripple flex flex-col items-center gap-1 rounded-2xl bg-surface-container p-3 text-center"
+          >
+            <Clock className="h-5 w-5 text-primary" />
+            <span className="text-[11px] font-medium text-foreground">Recent</span>
+          </Link>
+          <Link
+            to="/favorites"
+            className="ripple flex flex-col items-center gap-1 rounded-2xl bg-surface-container p-3 text-center"
+          >
+            <Star className="h-5 w-5 text-primary" />
+            <span className="text-[11px] font-medium text-foreground">Favorites</span>
+          </Link>
+          <Link
+            to="/tools"
+            className="ripple flex flex-col items-center gap-1 rounded-2xl bg-surface-container p-3 text-center"
+          >
+            <LayoutGrid className="h-5 w-5 text-primary" />
+            <span className="text-[11px] font-medium text-foreground">All tools</span>
+          </Link>
+        </div>
+      </section>
+
 
       <section className="mt-6">
         <div className="mb-3 flex items-center justify-between">
