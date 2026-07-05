@@ -9,17 +9,46 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VaultRouteImport } from './routes/vault'
+import { Route as TransferRouteImport } from './routes/transfer'
+import { Route as ToolsRouteImport } from './routes/tools'
+import { Route as TabsRouteImport } from './routes/tabs'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as RecentRouteImport } from './routes/recent'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as HelpRouteImport } from './routes/help'
 import { Route as FavoritesRouteImport } from './routes/favorites'
+import { Route as DuplicatesRouteImport } from './routes/duplicates'
+import { Route as DownloadsRouteImport } from './routes/downloads'
+import { Route as CloudRouteImport } from './routes/cloud'
 import { Route as BrowseRouteImport } from './routes/browse'
+import { Route as BackupRouteImport } from './routes/backup'
+import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CategoryTypeRouteImport } from './routes/category.$type'
 
+const VaultRoute = VaultRouteImport.update({
+  id: '/vault',
+  path: '/vault',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TransferRoute = TransferRouteImport.update({
+  id: '/transfer',
+  path: '/transfer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsRoute = ToolsRouteImport.update({
+  id: '/tools',
+  path: '/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TabsRoute = TabsRouteImport.update({
+  id: '/tabs',
+  path: '/tabs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -50,9 +79,34 @@ const FavoritesRoute = FavoritesRouteImport.update({
   path: '/favorites',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DuplicatesRoute = DuplicatesRouteImport.update({
+  id: '/duplicates',
+  path: '/duplicates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DownloadsRoute = DownloadsRouteImport.update({
+  id: '/downloads',
+  path: '/downloads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CloudRoute = CloudRouteImport.update({
+  id: '/cloud',
+  path: '/cloud',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BrowseRoute = BrowseRouteImport.update({
   id: '/browse',
   path: '/browse',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BackupRoute = BackupRouteImport.update({
+  id: '/backup',
+  path: '/backup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalyticsRoute = AnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -74,38 +128,65 @@ const CategoryTypeRoute = CategoryTypeRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/analytics': typeof AnalyticsRoute
+  '/backup': typeof BackupRoute
   '/browse': typeof BrowseRoute
+  '/cloud': typeof CloudRoute
+  '/downloads': typeof DownloadsRoute
+  '/duplicates': typeof DuplicatesRoute
   '/favorites': typeof FavoritesRoute
   '/help': typeof HelpRoute
   '/privacy': typeof PrivacyRoute
   '/recent': typeof RecentRoute
   '/search': typeof SearchRoute
   '/settings': typeof SettingsRoute
+  '/tabs': typeof TabsRoute
+  '/tools': typeof ToolsRoute
+  '/transfer': typeof TransferRoute
+  '/vault': typeof VaultRoute
   '/category/$type': typeof CategoryTypeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/analytics': typeof AnalyticsRoute
+  '/backup': typeof BackupRoute
   '/browse': typeof BrowseRoute
+  '/cloud': typeof CloudRoute
+  '/downloads': typeof DownloadsRoute
+  '/duplicates': typeof DuplicatesRoute
   '/favorites': typeof FavoritesRoute
   '/help': typeof HelpRoute
   '/privacy': typeof PrivacyRoute
   '/recent': typeof RecentRoute
   '/search': typeof SearchRoute
   '/settings': typeof SettingsRoute
+  '/tabs': typeof TabsRoute
+  '/tools': typeof ToolsRoute
+  '/transfer': typeof TransferRoute
+  '/vault': typeof VaultRoute
   '/category/$type': typeof CategoryTypeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/analytics': typeof AnalyticsRoute
+  '/backup': typeof BackupRoute
   '/browse': typeof BrowseRoute
+  '/cloud': typeof CloudRoute
+  '/downloads': typeof DownloadsRoute
+  '/duplicates': typeof DuplicatesRoute
   '/favorites': typeof FavoritesRoute
   '/help': typeof HelpRoute
   '/privacy': typeof PrivacyRoute
   '/recent': typeof RecentRoute
   '/search': typeof SearchRoute
   '/settings': typeof SettingsRoute
+  '/tabs': typeof TabsRoute
+  '/tools': typeof ToolsRoute
+  '/transfer': typeof TransferRoute
+  '/vault': typeof VaultRoute
   '/category/$type': typeof CategoryTypeRoute
 }
 export interface FileRouteTypes {
@@ -113,55 +194,119 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/analytics'
+    | '/backup'
     | '/browse'
+    | '/cloud'
+    | '/downloads'
+    | '/duplicates'
     | '/favorites'
     | '/help'
     | '/privacy'
     | '/recent'
     | '/search'
     | '/settings'
+    | '/tabs'
+    | '/tools'
+    | '/transfer'
+    | '/vault'
     | '/category/$type'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/analytics'
+    | '/backup'
     | '/browse'
+    | '/cloud'
+    | '/downloads'
+    | '/duplicates'
     | '/favorites'
     | '/help'
     | '/privacy'
     | '/recent'
     | '/search'
     | '/settings'
+    | '/tabs'
+    | '/tools'
+    | '/transfer'
+    | '/vault'
     | '/category/$type'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/analytics'
+    | '/backup'
     | '/browse'
+    | '/cloud'
+    | '/downloads'
+    | '/duplicates'
     | '/favorites'
     | '/help'
     | '/privacy'
     | '/recent'
     | '/search'
     | '/settings'
+    | '/tabs'
+    | '/tools'
+    | '/transfer'
+    | '/vault'
     | '/category/$type'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AnalyticsRoute: typeof AnalyticsRoute
+  BackupRoute: typeof BackupRoute
   BrowseRoute: typeof BrowseRoute
+  CloudRoute: typeof CloudRoute
+  DownloadsRoute: typeof DownloadsRoute
+  DuplicatesRoute: typeof DuplicatesRoute
   FavoritesRoute: typeof FavoritesRoute
   HelpRoute: typeof HelpRoute
   PrivacyRoute: typeof PrivacyRoute
   RecentRoute: typeof RecentRoute
   SearchRoute: typeof SearchRoute
   SettingsRoute: typeof SettingsRoute
+  TabsRoute: typeof TabsRoute
+  ToolsRoute: typeof ToolsRoute
+  TransferRoute: typeof TransferRoute
+  VaultRoute: typeof VaultRoute
   CategoryTypeRoute: typeof CategoryTypeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vault': {
+      id: '/vault'
+      path: '/vault'
+      fullPath: '/vault'
+      preLoaderRoute: typeof VaultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/transfer': {
+      id: '/transfer'
+      path: '/transfer'
+      fullPath: '/transfer'
+      preLoaderRoute: typeof TransferRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools': {
+      id: '/tools'
+      path: '/tools'
+      fullPath: '/tools'
+      preLoaderRoute: typeof ToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tabs': {
+      id: '/tabs'
+      path: '/tabs'
+      fullPath: '/tabs'
+      preLoaderRoute: typeof TabsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -204,11 +349,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FavoritesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/duplicates': {
+      id: '/duplicates'
+      path: '/duplicates'
+      fullPath: '/duplicates'
+      preLoaderRoute: typeof DuplicatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/downloads': {
+      id: '/downloads'
+      path: '/downloads'
+      fullPath: '/downloads'
+      preLoaderRoute: typeof DownloadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cloud': {
+      id: '/cloud'
+      path: '/cloud'
+      fullPath: '/cloud'
+      preLoaderRoute: typeof CloudRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/browse': {
       id: '/browse'
       path: '/browse'
       fullPath: '/browse'
       preLoaderRoute: typeof BrowseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/backup': {
+      id: '/backup'
+      path: '/backup'
+      fullPath: '/backup'
+      preLoaderRoute: typeof BackupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -238,13 +418,22 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AnalyticsRoute: AnalyticsRoute,
+  BackupRoute: BackupRoute,
   BrowseRoute: BrowseRoute,
+  CloudRoute: CloudRoute,
+  DownloadsRoute: DownloadsRoute,
+  DuplicatesRoute: DuplicatesRoute,
   FavoritesRoute: FavoritesRoute,
   HelpRoute: HelpRoute,
   PrivacyRoute: PrivacyRoute,
   RecentRoute: RecentRoute,
   SearchRoute: SearchRoute,
   SettingsRoute: SettingsRoute,
+  TabsRoute: TabsRoute,
+  ToolsRoute: ToolsRoute,
+  TransferRoute: TransferRoute,
+  VaultRoute: VaultRoute,
   CategoryTypeRoute: CategoryTypeRoute,
 }
 export const routeTree = rootRouteImport
