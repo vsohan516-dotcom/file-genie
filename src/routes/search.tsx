@@ -3,11 +3,32 @@ import { PageShell } from "@/components/layout/PageShell";
 import { EmptyState } from "@/components/common/EmptyState";
 import { FileRow } from "@/components/common/FileRow";
 import { isNative, ROOTS, walk } from "@/services/filesystem";
-import type { FileEntry } from "@/types/files";
+import type { FileEntry, FileKind } from "@/types/files";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { Search as SearchIcon, Smartphone } from "lucide-react";
 import { extOf } from "@/utils/files";
+
+type KindFilter = FileKind | "all";
+type DateFilter = "any" | "today" | "week" | "month" | "year";
+
+const KIND_OPTIONS: { id: KindFilter; label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "image", label: "Images" },
+  { id: "video", label: "Videos" },
+  { id: "audio", label: "Audio" },
+  { id: "document", label: "Docs" },
+  { id: "archive", label: "Archives" },
+  { id: "apk", label: "APK" },
+];
+
+const DATE_OPTIONS: { id: DateFilter; label: string; days: number }[] = [
+  { id: "any", label: "Any time", days: 0 },
+  { id: "today", label: "Today", days: 1 },
+  { id: "week", label: "This week", days: 7 },
+  { id: "month", label: "This month", days: 30 },
+  { id: "year", label: "This year", days: 365 },
+];
 
 export const Route = createFileRoute("/search")({
   head: () => ({
