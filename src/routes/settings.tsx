@@ -102,6 +102,10 @@ function SettingsPage() {
         <LinkRow to="/privacy" icon={ShieldCheck} label="Privacy policy" />
       </Section>
 
+      <Section title="Account">
+        <LinkRow to="/login" icon={Sparkles} label="Sign in with social" />
+      </Section>
+
       <Section title="About">
         <LinkRow to="/about" icon={Info} label="About Smart Files" />
         <LinkRow to="/help" icon={HelpCircle} label="Help & tips" />
