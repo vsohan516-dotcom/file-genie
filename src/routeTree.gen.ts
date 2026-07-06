@@ -17,6 +17,7 @@ import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as RecentRouteImport } from './routes/recent'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as HelpRouteImport } from './routes/help'
 import { Route as FavoritesRouteImport } from './routes/favorites'
 import { Route as DuplicatesRouteImport } from './routes/duplicates'
@@ -67,6 +68,11 @@ const RecentRoute = RecentRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HelpRoute = HelpRouteImport.update({
@@ -136,6 +142,7 @@ export interface FileRoutesByFullPath {
   '/duplicates': typeof DuplicatesRoute
   '/favorites': typeof FavoritesRoute
   '/help': typeof HelpRoute
+  '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/recent': typeof RecentRoute
   '/search': typeof SearchRoute
@@ -157,6 +164,7 @@ export interface FileRoutesByTo {
   '/duplicates': typeof DuplicatesRoute
   '/favorites': typeof FavoritesRoute
   '/help': typeof HelpRoute
+  '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/recent': typeof RecentRoute
   '/search': typeof SearchRoute
@@ -179,6 +187,7 @@ export interface FileRoutesById {
   '/duplicates': typeof DuplicatesRoute
   '/favorites': typeof FavoritesRoute
   '/help': typeof HelpRoute
+  '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/recent': typeof RecentRoute
   '/search': typeof SearchRoute
@@ -202,6 +211,7 @@ export interface FileRouteTypes {
     | '/duplicates'
     | '/favorites'
     | '/help'
+    | '/login'
     | '/privacy'
     | '/recent'
     | '/search'
@@ -223,6 +233,7 @@ export interface FileRouteTypes {
     | '/duplicates'
     | '/favorites'
     | '/help'
+    | '/login'
     | '/privacy'
     | '/recent'
     | '/search'
@@ -244,6 +255,7 @@ export interface FileRouteTypes {
     | '/duplicates'
     | '/favorites'
     | '/help'
+    | '/login'
     | '/privacy'
     | '/recent'
     | '/search'
@@ -266,6 +278,7 @@ export interface RootRouteChildren {
   DuplicatesRoute: typeof DuplicatesRoute
   FavoritesRoute: typeof FavoritesRoute
   HelpRoute: typeof HelpRoute
+  LoginRoute: typeof LoginRoute
   PrivacyRoute: typeof PrivacyRoute
   RecentRoute: typeof RecentRoute
   SearchRoute: typeof SearchRoute
@@ -333,6 +346,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/help': {
@@ -426,6 +446,7 @@ const rootRouteChildren: RootRouteChildren = {
   DuplicatesRoute: DuplicatesRoute,
   FavoritesRoute: FavoritesRoute,
   HelpRoute: HelpRoute,
+  LoginRoute: LoginRoute,
   PrivacyRoute: PrivacyRoute,
   RecentRoute: RecentRoute,
   SearchRoute: SearchRoute,

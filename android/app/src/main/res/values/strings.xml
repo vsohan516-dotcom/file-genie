@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Smart Files</string>
+    <string name="title_activity_main">Smart Files</string>
+    <string name="package_name">app.smartfiles.manager</string>
+    <string name="custom_url_scheme">app.smartfiles.manager</string>
+</resources>
